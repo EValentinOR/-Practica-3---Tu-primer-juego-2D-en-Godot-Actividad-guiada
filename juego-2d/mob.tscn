@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://besbl78lxxssc"]
+
+[ext_resource type="Script" uid="uid://dx6vvu7vtpr32" path="res://mob.gd" id="1_1qmh0"]
+[ext_resource type="Texture2D" uid="uid://bs14wru3k7162" path="res://ImagesTemplate/Ind/cat fly.png" id="2_1qmh0"]
+[ext_resource type="Texture2D" uid="uid://ta8qmanftdek" path="res://ImagesTemplate/Ind/cat 1.6.png" id="3_gfurk"]
+[ext_resource type="Texture2D" uid="uid://bu7usftqbjom2" path="res://ImagesTemplate/Ind/cat swim.png" id="4_ieysi"]
+[ext_resource type="Texture2D" uid="uid://ce8vbkh4p7uqc" path="res://ImagesTemplate/Ind/swim2.png" id="5_cixyi"]
+[ext_resource type="Texture2D" uid="uid://buoybyc1d6sa3" path="res://ImagesTemplate/Ind/cat walk.png" id="6_7ulmv"]
+[ext_resource type="Texture2D" uid="uid://dn5q8lnbq5cu8" path="res://ImagesTemplate/Ind/cat walk2.png" id="7_pcqmr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3h0py"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1qmh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gfurk")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ieysi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cixyi")
+}],
+"loop": 1,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7ulmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pcqmr")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1qmh0"]
+radius = 23.0
+height = 46.0
+
+[node name="Mob" type="RigidBody2D" unique_id=1969402651]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_1qmh0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1825201583 groups=["mobs"]]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_3h0py")
+animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=918754534]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_1qmh0")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=787502849]
+rect = Rect2(-50, -57, 100, 114)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
